@@ -1,0 +1,80 @@
+.matrix-bg {
+  background: black;
+  color: #0f0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ===========================
+   LAYER 1 — Dense, medium speed
+   =========================== */
+.matrix-bg::before {
+  content: "0101011100101001101010011001010110100101101010010010010110"
+          "1010010110100101101010011010010101010010101010110101001010";
+  position: absolute;
+  top: -300%;
+  left: -20%;
+  width: 200%;
+  height: 600%;
+  font-size: 22px;
+  line-height: 22px;
+  color: rgba(0, 255, 0, 0.18);
+  white-space: pre-wrap;
+  animation: matrix-rain 12s linear infinite;
+  pointer-events: none;
+}
+
+/* ===========================
+   LAYER 2 — Extra dense, slow and wide
+   =========================== */
+.matrix-bg::after {
+  content: "1010010110100101101001010101011001011010101010100101010011"
+          "0010101011010100101010001101010010110100101010101001010101"
+          "1010100101010010100101010101101001011010100100101101010010";
+  position: absolute;
+  top: -250%;
+  left: -30%;
+  width: 260%;
+  height: 550%;
+  font-size: 18px;
+  line-height: 18px;
+  color: rgba(0, 255, 0, 0.12);
+  white-space: pre-wrap;
+  animation: matrix-rain-alt 20s linear infinite;
+  pointer-events: none;
+}
+
+/* ===========================
+   LAYER 3 — Fast, subtle, adds texture
+   =========================== */
+.matrix-bg .matrix-layer-3 {
+  content: "010101010011001010101010010101001101010010101010110101001010"
+          "0101010101101010011001010100101010110100101010010110100101";
+  position: absolute;
+  top: -200%;
+  left: -10%;
+  width: 220%;
+  height: 500%;
+  font-size: 14px;
+  line-height: 14px;
+  color: rgba(0, 255, 0, 0.15);
+  white-space: pre-wrap;
+  animation: matrix-rain-fast 7s linear infinite;
+  pointer-events: none;
+}
+
+/* Keyframes */
+@keyframes matrix-rain {
+  0% { transform: translateY(-100%) translateX(0); }
+  100% { transform: translateY(100%) translateX(-10%); }
+}
+
+@keyframes matrix-rain-alt {
+  0% { transform: translateY(-100%) translateX(5%); }
+  100% { transform: translateY(100%) translateX(0%); }
+}
+
+@keyframes matrix-rain-fast {
+  0% { transform: translateY(-100%) translateX(10%); }
+  100% { transform: translateY(100%) translateX(-10%); }
+}
