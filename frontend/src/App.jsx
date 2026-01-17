@@ -17,12 +17,13 @@ import ReviewApplicants from "./pages/ReviewApplicants.jsx";
 import TagsPage from "./pages/TagsPage.jsx";
 import ForgotPassword from "./pages/ForgotPassword.jsx";   // 🔥 NEW
 import ResetPassword from "./pages/ResetPassword.jsx";      // 🔥 NEW
-
+import AdminPage from "./pages/AdminPage.jsx";
 
 export default function App() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
+      <Route path="/admin" element={<AdminPage />} />
       <Route path="/exampleMongoHookup" element={<ExampleMongoHookup />} />
       <Route path="/Profile" element={<Profile />} />
       <Route path="/userInput" element={<InputUserPage />} />
