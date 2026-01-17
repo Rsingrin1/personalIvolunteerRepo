@@ -18,7 +18,7 @@ const route = express.Router();
 
 route.post("/user", create);
 route.get("/user", requireAuth, getUserById);
-route.get("/users", getAllUsers);
+route.get("/users",requireAuth ,getAllUsers);
 route.put("/user", requireAuth, update);
 // route to delete the current authenticated user
 //route.delete("/user", requireAuth, deleteUser);

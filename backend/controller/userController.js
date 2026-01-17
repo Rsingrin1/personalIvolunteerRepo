@@ -35,6 +35,10 @@ export const create = async (req, res) => {
 
 export const getAllUsers = async (req, res) => {
   try {
+
+    if(req.user.userType !== 'admin'){
+      return res.status(403).json({ message: "Access denied. Admin role required." });
+    }
     const userData = await User.find();
     if (!userData || userData.length === 0) {
       return res.status(404).json({ message: "User data not found." });
