@@ -21,7 +21,7 @@ const User = () => {
   const deleteUser = async (id) => {
     if (!confirm("Delete this user?")) return;
     try {
-      await axios.delete(`http://localhost:5000/api/users/${id}`);
+      await axios.delete(`http://localhost:5000/api/users/${id}`,{withCredentials:true});
       setUsers((prev) => prev.filter((u) => u._id !== id));
     } catch (err) {
       console.error("Error deleting user", err);
