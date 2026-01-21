@@ -41,6 +41,21 @@ export const requireOrganizer = (req, res, next) => {
   next();
 };
 
+// Admin-only guard
+export const requireAdmin = (req, res, next) => {
+  if (!req.user) {
+    return res.status(401).json({ message: "Not authenticated." });
+  }
+
+  if (req.user.userType !== "admin") {
+    return res
+      .status(403)
+      .json({ message: "Admin permissions required." });
+  }
+
+  next();
+};
+
 // Volunteer or organizer guard
 export const requireVolunteerOrOrganizer = (req, res, next) => {
   if (!req.user) {
