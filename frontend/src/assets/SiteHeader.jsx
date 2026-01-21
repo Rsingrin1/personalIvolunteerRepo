@@ -32,6 +32,12 @@ export default function SiteHeader() {
       ? "/MyEventsVolunteer"
       : "/";
 
+  const landingPage =
+    userType === "admin"
+      ? "/admin"
+      : "/";
+
+
   return (
     <Box
       as="header"
@@ -52,7 +58,7 @@ export default function SiteHeader() {
         {/* Logo / Brand */}
         <Heading
           as={RouterLink}
-          to="/landingPage"
+          to={landingPage}
           fontSize="24px"
           color="#181c71"
           _hover={{ textDecoration: "none", opacity: 0.9 }}

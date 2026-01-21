@@ -38,7 +38,7 @@ const TagsPage = () => {
       if (form.slug && form.slug.trim() !== "") payload.slug = form.slug.trim();
       if (form.description && form.description.trim() !== "") payload.description = form.description.trim();
 
-      const res = await axios.post("http://localhost:5000/api/tags", payload);
+      const res = await axios.post("http://localhost:5000/api/tags", payload, { withCredentials: true });
       setTags((prev) => [res.data, ...prev]);
       setForm({ name: "", slug: "", description: "" });
     } catch (err) {
@@ -51,7 +51,7 @@ const TagsPage = () => {
   const deleteTag = async (id) => {
     if (!confirm("Delete this tag?")) return;
     try {
-      await axios.delete(`http://localhost:5000/api/tags/${id}`);
+      await axios.delete(`http://localhost:5000/api/tags/${id}`, { withCredentials: true });
       setTags((prev) => prev.filter((t) => t._id !== id));
     } catch (err) {
       setError(err.response?.data?.message || err.message);
