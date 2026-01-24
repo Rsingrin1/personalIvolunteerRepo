@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { use, useEffect, useState } from "react";
 import {
   Box,
   Heading,
@@ -16,6 +16,9 @@ import {
 import { useParams, useNavigate } from "react-router-dom";
 import BackArrow from "../assets/backArrow";
 import SiteHeader from "../assets/SiteHeader"; // ✅ NEW
+import useUser from "../hooks/userInteractHook.jsx";
+
+
 
 const API_BASE = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
 
@@ -31,7 +34,9 @@ export default function EventDetails() {
   const [applyError, setApplyError] = useState(null);
   const [applyMessage, setApplyMessage] = useState(null);
 
-  const currentUser = JSON.parse(localStorage.getItem("currentUser") || "{}");
+  //const currentUser = JSON.parse(localStorage.getItem("currentUser") || "{}");
+  const { user } = useUser();
+  const currentUser = user;
   const userId = currentUser?.id;
   const userType = currentUser?.userType;
   const isVolunteer = userType === "volunteer";
