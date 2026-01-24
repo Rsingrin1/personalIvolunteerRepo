@@ -16,6 +16,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import BackArrow from "../assets/backArrow";
 import SiteHeader from "../assets/SiteHeader";   // ✅ NEW IMPORT
+import useUser from "../hooks/userInteractHook.jsx";
 
 const API_BASE = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
 
@@ -32,8 +33,9 @@ export default function EventsCalendar() {
   const [year, setYear] = useState(today.getFullYear());
 
   // current user (from localStorage)
-  const currentUser = JSON.parse(localStorage.getItem("currentUser") || "{}");
-  const userId = currentUser?.id;
+  const { user } = useUser();
+  const currentUser = user;
+  const userId = currentUser?._id;
   const userType = currentUser?.userType;
 
   useEffect(() => {

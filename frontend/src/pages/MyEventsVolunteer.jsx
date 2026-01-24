@@ -32,7 +32,7 @@ export default function MyEventsVolunteer() {
   const { user } = useUser();
 
   const currentUser = user;
-  const userId = currentUser?.id;
+  const userId = currentUser?._id;
   const userName = currentUser?.username;
 
 
