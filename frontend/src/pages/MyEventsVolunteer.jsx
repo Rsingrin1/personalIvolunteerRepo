@@ -18,7 +18,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import Profile from "../assets/profileMenu";
 import SiteHeader from "../assets/SiteHeader";
-
+import useUser from "../hooks/userInteractHook";
 
 const API_BASE = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
 
@@ -29,18 +29,12 @@ export default function MyEventsVolunteer() {
   const [loading, setLoading] = useState(true);
   const [apiError, setApiError] = useState(null);
 
-  const currentUser = JSON.parse(localStorage.getItem("currentUser") || "{}");
+  const { user } = useUser();
+
+  const currentUser = user;
   const userId = currentUser?.id;
   const userName = currentUser?.username;
 
-  const handleLogout = () => {
-    // cookie is cleared server-side if you add a logout route later;
-    // for now we just clear local storage + send them to Login.
-    localStorage.removeItem("authToken");
-    localStorage.removeItem("currentUser");
-    localStorage.removeItem("organizerId");
-    navigate("/Login");
-  };
 
   // Fetch ONLY this volunteer's events from backend
   useEffect(() => {
@@ -154,7 +148,6 @@ export default function MyEventsVolunteer() {
         <Profile
           userName={userName || "Volunteer"}
           profilePic="https://bit.ly/dan-abramov"
-          onLogout={handleLogout}
         />
       </Flex>
 

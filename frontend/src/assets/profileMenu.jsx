@@ -9,7 +9,7 @@ import {
 } from "@chakra-ui/react";
 import useLogout from "../hooks/handleLogout";
 
-export default function Profile({ userName, profilePic, onLogout}) {
+export default function Profile({ userName, profilePic}) {
 const handleLogout = useLogout(); //this is using react router to navigate
 
   return (

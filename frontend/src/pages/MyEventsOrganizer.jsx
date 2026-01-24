@@ -17,6 +17,8 @@ import {
 import { useNavigate } from "react-router-dom";
 import Profile from "../assets/profileMenu";
 import SiteHeader from "../assets/SiteHeader";
+import useUser from "../hooks/userInteractHook.jsx";
+
 
 const API_BASE = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
 
@@ -27,17 +29,9 @@ export default function MyEventsOrganizer() {
   const [loading, setLoading] = useState(true);
   const [apiError, setApiError] = useState(null);
 
-  const organizerId =
-    localStorage.getItem("organizerId") ||
-    JSON.parse(localStorage.getItem("currentUser") || "{}").id ||
-    null;
+  const { user } = useUser();
+  const organizerId = user?._id;
 
-  const handleLogout = () => {
-    localStorage.removeItem("authToken");
-    localStorage.removeItem("currentUser");
-    localStorage.removeItem("organizerId");
-    navigate("/Login");
-  };
 
   const handleCreateEvent = () => {
     navigate("/modifyEvent");
@@ -149,11 +143,9 @@ export default function MyEventsOrganizer() {
 
         <Profile
           userName={
-            JSON.parse(localStorage.getItem("currentUser") || "{}").username ||
-            "Organizer"
+            user?.username
           }
           profilePic="https://bit.ly/dan-abramov"
-          onLogout={handleLogout}
         />
       </Flex>
 
