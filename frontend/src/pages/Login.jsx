@@ -13,6 +13,7 @@ import {
   Link,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export default function InputUser() {
   const [username, setUsername] = useState("");
@@ -36,33 +37,17 @@ export default function InputUser() {
 
     setLoading(true);
     try {
-      const res = await fetch(`${API_BASE}/api/login`, {
-        method: "POST",
-        credentials: "include", // 🔥 cookie-only auth: accept HTTP-only token
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
+
+      const res = await axios.post(`${API_BASE}/api/login`, 
+        {
           username,
           password,
-        }),
-      });
-
-      let data = null;
-      const contentType = res.headers.get("content-type") || "";
-      if (contentType.includes("application/json")) {
-        try {
-          data = await res.json();
-        } catch {
-          data = null;
+        },
+        {
+          withCredentials: true,
         }
-      }
-
-      if (!res.ok) {
-        setError(
-          (data && (data.message || data.errorMessage)) ||
-            `Login failed with status ${res.status}`
-        );
-        return;
-      }
+      );
+      const data = res.data;
 
       // Expected response: { message, user: { id, username, email, userType } }
       if (!data || !data.user) {
@@ -71,16 +56,6 @@ export default function InputUser() {
       }
 
       const user = data.user;
-
-      // 🔥 Cookie holds the token; we only keep user info in localStorage
-      localStorage.setItem("currentUser", JSON.stringify(user));
-
-      // For organizer-only pages that need organizerId
-      if (user.userType === "organizer") {
-        localStorage.setItem("organizerId", user.id);
-      } else {
-        localStorage.removeItem("organizerId");
-      }
 
       setMessage(data.message || "Login successful.");
 

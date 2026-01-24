@@ -1,5 +1,7 @@
 // frontend/src/assets/SiteHeader.jsx
 import React from "react";
+import { useEffect, useState } from "react";
+
 import {
   Box,
   Flex,
@@ -9,14 +11,17 @@ import {
   Link as ChakraLink,
 } from "@chakra-ui/react";
 import { Link as RouterLink} from "react-router-dom";
-import axios from "axios";
 import useLogout from "../hooks/handleLogout";
+import useUser from "../hooks/userInteractHook.jsx";
+
 
 export default function SiteHeader() {
   const handleLogout = useLogout();
+  const {user} = useUser();
+  const currentUser = user;
+  //const currentUser = JSON.parse(localStorage.getItem("currentUser") || "{}");
 
-  const currentUser = JSON.parse(localStorage.getItem("currentUser") || "{}");
-  const isLoggedIn = !!currentUser?.id;
+  const isLoggedIn = currentUser.username;
   const userType = currentUser?.userType;
 
   // Decide default "My Events" route based on role
