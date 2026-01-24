@@ -7,18 +7,11 @@ import {
   MenuItem,
   IconButton,
 } from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom";
-
+import useLogout from "../hooks/handleLogout";
 
 export default function Profile({ userName, profilePic, onLogout}) {
-  const navigate = useNavigate(); //this is using react router to navigate
+const handleLogout = useLogout(); //this is using react router to navigate
 
-const handleLogout = () => {
-    localStorage.removeItem("authToken");
-    localStorage.removeItem("currentUser");
-    localStorage.removeItem("organizerId");
-    navigate("/");
-  };
   return (
     <Menu>
       <MenuButton

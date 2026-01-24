@@ -8,21 +8,16 @@ import {
   Button,
   Link as ChakraLink,
 } from "@chakra-ui/react";
-import { Link as RouterLink, useNavigate } from "react-router-dom";
+import { Link as RouterLink} from "react-router-dom";
+import axios from "axios";
+import useLogout from "../hooks/handleLogout";
 
 export default function SiteHeader() {
-  const navigate = useNavigate();
+  const handleLogout = useLogout();
 
   const currentUser = JSON.parse(localStorage.getItem("currentUser") || "{}");
   const isLoggedIn = !!currentUser?.id;
   const userType = currentUser?.userType;
-
-  const handleLogout = () => {
-    localStorage.removeItem("authToken");
-    localStorage.removeItem("currentUser");
-    localStorage.removeItem("organizerId");
-    navigate("/");
-  };
 
   // Decide default "My Events" route based on role
   const myEventsPath =

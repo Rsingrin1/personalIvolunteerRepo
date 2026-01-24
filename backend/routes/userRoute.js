@@ -8,6 +8,7 @@ import {
   update,
   deleteUser,
   deleteUserById,
+  logout,
   login,
   passwordResetRequest,
   passwordReset,
@@ -28,6 +29,8 @@ route.delete("/users/:id", requireAuth, requireAdmin, deleteUserById);
 
 // ⬇️ NEW login endpoint
 route.post("/login", login);
+route.post("/logout", requireAuth, logout);
+
 
 // ⬇️ Password reset endpoints
 route.post("/password-reset-request", passwordResetRequest);
