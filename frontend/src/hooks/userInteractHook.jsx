@@ -1,7 +1,8 @@
+const API_BASE = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-export default function useUser(id) {
+export default function useUser() {
   const initialState = {
     username: "",
     email: "",
@@ -30,7 +31,7 @@ export default function useUser(id) {
       setLoading(true);
       setError(null);
       try {
-        const res = await axios.get(`http://localhost:5000/api/user`, {
+        const res = await axios.get(`${API_BASE}/api/user`, {
           withCredentials: true, // Send cookies with request
         });
         setUser(res.data);
@@ -48,7 +49,7 @@ export default function useUser(id) {
   // update user
   const updateUser = async () => {
     return axios.put(
-      `http://localhost:5000/api/user`,
+      `${API_BASE}/api/user`,
       user,
       {
         withCredentials: true, // Send cookies with request

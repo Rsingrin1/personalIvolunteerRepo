@@ -19,8 +19,7 @@ import SiteHeader from "../assets/SiteHeader";   // ✅ NEW IMPORT
 
 export default function Profile() {
   const navigate = useNavigate();
-  const id = JSON.parse(localStorage.getItem("currentUser"))?.id;
-  const { user, inputHandler, updateUser } = useUser(id);
+  const { user, inputHandler, updateUser } = useUser();
 
   const submitForm = async (e) => {
     e.preventDefault();
