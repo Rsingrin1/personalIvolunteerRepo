@@ -19,6 +19,8 @@ import {
 import { useNavigate, useParams } from "react-router-dom";
 import Profile from "../assets/profileMenu";
 import SiteHeader from "../assets/SiteHeader";   // ⭐ NEW
+import useUser from "../hooks/userInteractHook.jsx";
+
 
 const API_BASE = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
 
@@ -33,15 +35,10 @@ export default function ReviewApplicants() {
   const [applicants, setApplicants] = useState([]);
   const [participants, setParticipants] = useState([]);
 
-  const currentUser = JSON.parse(localStorage.getItem("currentUser") || "{}");
+  const { user } = useUser();
+  const currentUser = user;
   const userName = currentUser?.username || "Organizer";
 
-  const handleLogout = () => {
-    localStorage.removeItem("authToken");
-    localStorage.removeItem("currentUser");
-    localStorage.removeItem("organizerId");
-    navigate("/Login");
-  };
 
   const loadApplicants = async () => {
     setLoading(true);
@@ -179,7 +176,6 @@ export default function ReviewApplicants() {
         <Profile
           userName={userName}
           profilePic="https://bit.ly/dan-abramov"
-          onLogout={handleLogout}
         />
       </Flex>
 

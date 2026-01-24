@@ -1,7 +1,4 @@
 // frontend/src/assets/SiteHeader.jsx
-import React from "react";
-import { useEffect, useState } from "react";
-
 import {
   Box,
   Flex,
@@ -19,9 +16,7 @@ export default function SiteHeader() {
   const handleLogout = useLogout();
   const {user} = useUser();
   const currentUser = user;
-  //const currentUser = JSON.parse(localStorage.getItem("currentUser") || "{}");
-
-  const isLoggedIn = currentUser.username;
+  const isLoggedIn = currentUser._id;
   const userType = currentUser?.userType;
 
   // Decide default "My Events" route based on role

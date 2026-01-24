@@ -8,9 +8,11 @@ import {
   IconButton,
 } from "@chakra-ui/react";
 import useLogout from "../hooks/handleLogout";
+import { useNavigate } from "react-router-dom";
 
 export default function Profile({ userName, profilePic}) {
 const handleLogout = useLogout(); //this is using react router to navigate
+const navigate = useNavigate();
 
   return (
     <Menu>

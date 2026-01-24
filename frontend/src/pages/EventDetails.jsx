@@ -37,8 +37,8 @@ export default function EventDetails() {
   //const currentUser = JSON.parse(localStorage.getItem("currentUser") || "{}");
   const { user } = useUser();
   const currentUser = user;
-  const userId = currentUser?.id;
-  const userType = currentUser?.userType;
+  const userId = currentUser?._id;
+  const userType = currentUser.userType;
   const isVolunteer = userType === "volunteer";
 
   // Fetch event details
