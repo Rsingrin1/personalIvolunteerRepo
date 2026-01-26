@@ -3,13 +3,16 @@ import "../assets/editUser.css";
 import axios from "axios";
 import { Link } from "react-router-dom";
 //import toast from "react-hot-toast";
+const API_BASE = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
+
+
 
 const User = () => {
   const [users, setUsers] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/users",{withCredentials:true});
+        const response = await axios.get(`${API_BASE}/api/users`,{withCredentials:true});
         setUsers(response.data);
       } catch (error) {
         console.log("Error while fetching data", error);
@@ -21,7 +24,7 @@ const User = () => {
   const deleteUser = async (id) => {
     if (!confirm("Delete this user?")) return;
     try {
-      await axios.delete(`http://localhost:5000/api/users/${id}`,{withCredentials:true});
+      await axios.delete(`${API_BASE}/api/users/${id}`,{withCredentials:true});
       setUsers((prev) => prev.filter((u) => u._id !== id));
     } catch (err) {
       console.error("Error deleting user", err);
