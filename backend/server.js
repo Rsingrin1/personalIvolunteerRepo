@@ -1,38 +1,3 @@
-/*import express from "express";
-
-const app = express();
-app.get("/",(req,res)=>{
-res.send("Server is ready");
-});
-app.listen(5000,()=>{
-console.log("Server started at http://localhost:5000");
-});
-import dotenv from "dotenv";
-dotenv.config();
-
-import { connectDB } from "./config/db.js";
-connectDB();
-
-import userRoute from "./routes/userRoute.js";
-//API Routes
-app.use("/api",userRoute); 
-app.get("/api/user",(req,res)=>{
-    res.send(userRoute);
-});
-
-//display message on server side local host
-app.get('/message', (req, res) => {
-    res.json({message: 'Hello'})
-})
-
-
-import cors from "cors";
-// Middleware
-app.use(cors());
-app.use(express.json());*/
-
-// backend/server.js
-// backend/server.js
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
@@ -55,7 +20,7 @@ const app = express();
 // ✔ Required for cookie authentication between frontend & backend
 app.use(
   cors({
-    origin: ["http://localhost:5173", "http://127.0.0.1:5173"],
+    origin: ["http://localhost:5173", "http://127.0.0.1:5173",],
     credentials: true,
   })
 );
