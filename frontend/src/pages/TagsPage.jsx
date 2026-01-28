@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+const API_BASE = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
 
 const TagsPage = () => {
   const [tags, setTags] = useState([]);
@@ -12,7 +13,7 @@ const TagsPage = () => {
   useEffect(() => {
     const fetchTags = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/tags");
+        const res = await axios.get(`${API_BASE}/api/tags`);
         setTags(res.data);
       } catch (err) {
         setError(err.response?.data?.message || err.message);
@@ -38,7 +39,7 @@ const TagsPage = () => {
       if (form.slug && form.slug.trim() !== "") payload.slug = form.slug.trim();
       if (form.description && form.description.trim() !== "") payload.description = form.description.trim();
 
-      const res = await axios.post("http://localhost:5000/api/tags", payload, { withCredentials: true });
+      const res = await axios.post(`${API_BASE}/api/tags`, payload, { withCredentials: true });
       setTags((prev) => [res.data, ...prev]);
       setForm({ name: "", slug: "", description: "" });
     } catch (err) {
@@ -51,7 +52,7 @@ const TagsPage = () => {
   const deleteTag = async (id) => {
     if (!confirm("Delete this tag?")) return;
     try {
-      await axios.delete(`http://localhost:5000/api/tags/${id}`, { withCredentials: true });
+      await axios.delete(`${API_BASE}/api/tags/${id}`, { withCredentials: true });
       setTags((prev) => prev.filter((t) => t._id !== id));
     } catch (err) {
       setError(err.response?.data?.message || err.message);
